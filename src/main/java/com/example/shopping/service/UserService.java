@@ -1,9 +1,6 @@
 package com.example.shopping.service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.example.shopping.dao.UserDao;
-import com.example.shopping.dao.UserDetailDao;
 import com.example.shopping.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +11,6 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserDao userDao;
-
-    @Autowired
-    UserDetailDao userdetailDao;
 
 //    @Resource
 //    SessionFactory sessionFactory;
@@ -33,8 +27,9 @@ public class UserService {
      * 获取用户列表
      */
     public List<User> getAllUser(){
-        List<User> users = userDao.findAllByOrderById();
-        return users;
+//        List<User> users = userDao.findAllByOrderById();
+//        return users;
+        return null;
 //        JSONObject result = new JSONObject();
 //        JSONArray userList = new JSONArray();
 //        List<User> users = userDao.findAllByOrderById();
@@ -66,19 +61,12 @@ public class UserService {
         userDao.save(user);
     }
 
-    public boolean login(String username, String password) {
-        User user = userDao.findByNameAndUserDetailPassword(username, password);
-        if (null == user) {
+    public boolean login(User user) {
+        User validateUser = userDao.findByUsername(user.getUsername());
+        if (validateUser == null) {
             return false;
         } else {
-
-            return true;
+            return validateUser.getPassword().equals(user.getPassword());
         }
-    }
-    /**
-     * 根据用户名获取用户对象
-     */
-    public User getUser(String nameOrEmail){
-       return userDao.findByName(nameOrEmail);
     }
 }

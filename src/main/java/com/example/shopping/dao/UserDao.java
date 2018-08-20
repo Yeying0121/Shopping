@@ -9,9 +9,5 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<User,Integer> {
 
-    List<User> findAllByOrderById();
-
-    User findByName(String name);
-
-    User findByNameAndUserDetailPassword(String userName, String password);
+    User findByUsername(String username);
 }

@@ -16,23 +16,22 @@
 <div class="container-fluid">
     <h1 class="title center">注册</h1>
     <br/>
+    <div th:if="${error}">
+        <div th:text="${error}" style="color:#F00"></div>
+    </div>
     <div class="col-sm-offset-2 col-md-offest-2">
         <!-- 表单输入 -->
         <div  class="form-horizontal">
             <div class="form-group">
-                <label for="inputEmail" class="col-sm-2 col-md-2 control-label">用户名</label>
-                <p style="color: red" th:text="${msg}" th:if="${ not #strings.isEmpty(msg)}"></p>
-                <div th:if="${error}">
-                    <div th:text="${error}" style="color:#F00"></div>
-                </div>
+                <label for="inputUserName" class="col-sm-2 col-md-2 control-label">用户名</label>
                 <div class="col-sm-6 col-md-6">
-                    <input type="text" class="form-control" id="inputUserName" placeholder="请输入数字"/>
+                    <input type="text" class="form-control" id="inputUserName" placeholder="请输入用户名" name="username"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-sm-2 col-md-2 control-label">邮箱</label>
                 <div class="col-sm-6 col-md-6">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="请输入正确的邮箱格式"/>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="请输入正确的邮箱格式" name="email"/>
                 </div>
             </div>
             <!--<div class="form-group">-->
@@ -44,44 +43,27 @@
             <div class="form-group">
                 <label for="inputPassword" class="col-sm-2 col-md-2 control-label">密码</label>
                 <div class="col-sm-6 col-md-6">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="禁止输入非法字符" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPhoneNumber" class="col-sm-2 col-md-2 control-label">手机号码</label>
-                <div class="col-sm-6 col-md-6">
-                    <input type="text" class="form-control" id="inputPhoneNumber" placeholder="请输入手机号" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="man" class="col-sm-2 col-md-2 control-label">性别</label>
-                <div class="col-sm-6 col-md-6">
-                    <label class="radio-inline">
-                        <input type="radio" id="man" value="option1"> 男
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" id="woman" value="option2"> 女
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="birthday" class="col-sm-2 col-md-2 control-label">出生日期</label>
-                <div class="col-sm-6 col-md-6">
-                    <input type="text" class="form-control" id="birthday" placeholder="请输入出生日期" />
+                    <input type="password" class="form-control" id="inputPassword" placeholder="禁止输入非法字符" name="password"/>
                 </div>
             </div>
             <!--<div class="form-group">-->
-                <!--<label for="postcodes" class="col-sm-2 col-md-2 control-label">邮政编码</label>-->
+                <!--<label for="man" class="col-sm-2 col-md-2 control-label">性别</label>-->
                 <!--<div class="col-sm-6 col-md-6">-->
-                    <!--<input type="text" class="form-control" id="postcodes" placeholder="请输入邮政编码" />-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" id="man" value="option1"> 男-->
+                    <!--</label>-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" id="woman" value="option2"> 女-->
+                    <!--</label>-->
                 <!--</div>-->
             <!--</div>-->
             <!--<div class="form-group">-->
-                <!--<label for="address" class="col-sm-2 col-md-2 control-label">地址</label>-->
+                <!--<label for="birthday" class="col-sm-2 col-md-2 control-label">出生日期</label>-->
                 <!--<div class="col-sm-6 col-md-6">-->
-                    <!--<input type="text" class="form-control" id="address" placeholder="请输入寄送地址" />-->
+                    <!--<input type="text" class="form-control" id="birthday" placeholder="请输入出生日期" />-->
                 <!--</div>-->
             <!--</div>-->
+
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-6">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>

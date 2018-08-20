@@ -5,13 +5,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_main")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private Integer id;
 
-    @Column(name = "Name")
-    private String name;
+    @Id
+    @Column(name = "Username")
+    private String username;
 
     @Column(name = "Email")
     private String email;
@@ -19,25 +16,8 @@ public class User {
     @Column(name = "Role")
     private int role;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private UserDetail userDetail;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column(name = "Password")
+    private String password;
 
     public int getRole() {
         return role;
@@ -55,11 +35,19 @@ public class User {
         this.email = email;
     }
 
-    public UserDetail getUserDetail() {
-        return userDetail;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserDetail(UserDetail userDetail) {
-        this.userDetail = userDetail;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
