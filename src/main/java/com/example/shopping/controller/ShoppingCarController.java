@@ -1,7 +1,7 @@
 package com.example.shopping.controller;
 
 import com.example.shopping.entity.ShoppingCar;
-import com.example.shopping.entity.User;
+import com.example.shopping.entity.SysUser;
 import com.example.shopping.service.ShoppingCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class ShoppingCarController {
     }
 
     @GetMapping("/")
-    public String getShoppingCars(User user, Model model){
+    public String getShoppingCars(SysUser user, Model model){
         Integer userId = user.getId();
         List<ShoppingCar> shoppingCars = shoppingCarService.getShoppingCars(userId);
         model.addAttribute("shoppingCars",shoppingCars);

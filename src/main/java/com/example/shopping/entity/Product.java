@@ -11,7 +11,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String productId;
+    private Integer productId;
 
     @Column(name = "ProductName")
     private String productName;
@@ -34,15 +34,6 @@ public class Product {
 
     @Column(name = "CreateTime")
     private Date createTime;
-
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
     public String getProductName() {
         return productName;
@@ -99,5 +90,13 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }

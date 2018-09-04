@@ -15,7 +15,7 @@ public class ShoppingCar {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
-    private User user;
+    private SysUser user;
 
     @Column(name = "productId")
     private String productId;
@@ -25,8 +25,6 @@ public class ShoppingCar {
 
     @Column(name = "counts")
     private Integer counts;
-
-
 
 
     public Integer getProductPrice() {
@@ -45,11 +43,11 @@ public class ShoppingCar {
         this.counts = counts;
     }
 
-    public User getUser() {
+    public SysUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(SysUser user) {
         this.user = user;
     }
 

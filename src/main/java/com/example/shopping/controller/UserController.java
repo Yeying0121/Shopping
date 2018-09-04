@@ -1,7 +1,7 @@
 package com.example.shopping.controller;
 
 import com.example.shopping.config.WebSecurityConfig;
-import com.example.shopping.entity.User;
+import com.example.shopping.entity.SysUser;
 import com.example.shopping.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,21 +36,17 @@ public class UserController {
 //    @ResponseBody
     @RequestMapping("/login")
     public String login(){
-        // 到登录页面，可能可以校验Token
         // 若带有Token，则可以直接跳转如首页
         return "login";
     }
 
-    /**
-     * 登陆验证
-     */
-//
+//    /**
+//     * 登陆验证
+//     */
 //    @PostMapping("/dologin")
-//    public String dologin(User user, Model model){
+//    public String dologin(SysUser user, Model model){
 //        Boolean loginSuccess = userService.login(user);
 //        if(loginSuccess){
-////            Cookie cookie = new Cookie(WebSecurityConfig.SESSION_KEY, user.toString());
-////            response.addCookie(cookie);
 //            model.addAttribute("currentUser",user);
 //            return "register";
 //        }else {
@@ -61,7 +57,7 @@ public class UserController {
 
 
     @PostMapping("/doregister")
-    public String doregister(User user){
+    public String doregister(SysUser user){
         return "";
     }
 

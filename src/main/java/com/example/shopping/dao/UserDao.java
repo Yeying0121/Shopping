@@ -1,6 +1,6 @@
 package com.example.shopping.dao;
 
-import com.example.shopping.entity.User;
+import com.example.shopping.entity.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface UserDao extends JpaRepository<User,String> {
+public interface UserDao extends JpaRepository<SysUser,String> {
 
-    User findByUsername(String userName);
+    SysUser findByUsername(String userName);
 
     @Modifying
     @Transactional

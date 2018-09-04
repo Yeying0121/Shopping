@@ -2,7 +2,7 @@ package com.example.shopping.controller;
 
 import com.example.shopping.entity.Product;
 import com.example.shopping.entity.ProductCategory;
-import com.example.shopping.entity.User;
+import com.example.shopping.entity.SysUser;
 import com.example.shopping.service.ProductCategoryService;
 import com.example.shopping.service.ProductService;
 import com.example.shopping.service.UserService;
@@ -41,12 +41,17 @@ public class MainController {
      */
     @GetMapping("/control")
     public String control(Model model){
-        List<User> users = userService.getAllUser();
+        List<SysUser> users = userService.getAllUser();
         List<Product> products = productService.getAllProducts();
         List<ProductCategory> productCategories = productCategoryService.getAllCategory();
         model.addAttribute("users",users);
         model.addAttribute("products",products);
         model.addAttribute("categories",productCategories);
         return "control";
+    }
+
+    @GetMapping("/403")
+    public String error403() {
+        return "/error/403";
     }
 }
