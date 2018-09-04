@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>小小购物</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<link th:href="@{/css/bootstrap.css/bootstrap.min.css}" rel="stylesheet">-->
+<!--<link th:href="@{/css/style.css}" rel="stylesheet">-->
+
+<!--<script th:src="@{/js/bootstrap.js/bootstrap.min.js}" type="text/javascript"></script>-->
+<!--<script th:src="@{/js/layer.js}" type="text/javascript"></script>-->
+<!--<script th:src="@{/jquery/jquery-3.3.1.min.js}"></script>-->
+</head>
+<body>
+<div th:fragment="header">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/shopping/main}">小小购物</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav ">
+                <a th:object="${currentUser}" th:if="${#lists.isEmpty(currentUser)}">
+                    <a th:href="@{/users/register}" methods="post" class="glyphicon glyphicon-user">注册</a>
+                    <a th:href="@{/users/login}" methods="post" class="glyphicon glyphicon-log-in">登录</a>
+                </a>
+                <span th:if="${not #lists.isEmpty(currentUser)}">
+                    <span th:if="${currentUser.role == 1}">
+                        <a th:href="@{/users/control}" methods="post">控制台</a>
+                    </span>
+                    <li class="dropdown">
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/shopping/shopping_car}">购物车</a></li>
+                            <li><a th:href="@{/shopping/shopping_record}">订单状态</a></li>
+                            <span  th:if="${currentUser.role == 1}">
+                                <li><a th:href="@{/shopping/shopping_handle}">处理订单</a></li>
+                            </span>
+                            <li role="separator" class="divider"></li>
+                            <li><a th:href="@{/users/amend_info}">个人资料修改</a></li>
+                            <li><a th:href="@{/users/doLogout}">注销登录</a></li>
+                        </ul>
+                    </li>
+                </span>
+            </ul>
+
+            <form class="navbar-form navbar-right" th:action="@{/shopping/search}">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="搜索商品" name="productName"/>
+                </div>
+                <button class="btn btn-default" type="submit">查找商品</button>
+            </form>
+        </div>
+    </div>
+</nav>
+</div>
+<script>
+
+    // function searchProduct() {
+    //     var search = {};
+    //     search.searchKeyWord = document.getElementById("searchKeyWord").value;
+    //     var searchResult = "";
+    //     $.ajax({
+    //         async : false,
+    //         type : 'POST',
+    //         url : 'searchPre',
+    //         data : search,
+    //         dataType : 'json',
+    //         success : function(result) {
+    //             searchResult = result.result;
+    //         },
+    //         error : function(result) {
+    //             layer.alert('查询错误');
+    //         }
+    //     });
+    //     if(searchResult == "success")
+    //         window.location.href = "search";
+    // }
+</script>
+</body>
+</html>

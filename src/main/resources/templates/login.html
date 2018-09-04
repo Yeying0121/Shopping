@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>管理员首页</title>
+    <title>用户登陆</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
-    <link th:href="@{css/bootstrap-theme.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-theme.css}" rel="stylesheet"/>
     <link th:href="@{/css/signin.css}" rel="stylesheet"/>
     <style type="text/css">
-        .register-label {
+        .password-label {
             float: right;
         }
     </style>
@@ -18,7 +18,7 @@
 <body>
 <div class="container">
 
-    <form class="form-signin" action="/users/dologin" method="post"≤>
+    <form class="form-signin" action="/users/login" method="post" th:object="${user}">
         <h2 class="form-signin-heading">请登录</h2>
         <p style="color: red" th:text="${msg}" th:if="${ not #strings.isEmpty(msg)}"></p>
 
@@ -32,15 +32,21 @@
             <label>
                 <input type="checkbox" value="remember-me"> 记住我
             </label>
-            <label class="register-label">
-                <a href="/users/register">注册</a>
+            <label class="password-label">
+                <a href="/users/register">忘记密码</a>
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <input class="btn btn-lg btn-primary btn-block" type="button" onclick="regist()" value="注册"/>
     </form>
 </div>
+<!--<script type="text/javascript">-->
 
-<script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript"></script>
+<!--</script>-->
+<script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript">
+    function regist() {
+    window.location.href='register';
+}</script>
 <script th:href="@{/bootstrap/js/bootstrap.js}"></script>
 </body>
 </html>

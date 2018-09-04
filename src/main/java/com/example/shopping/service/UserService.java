@@ -3,6 +3,7 @@ package com.example.shopping.service;
 import com.example.shopping.dao.UserDao;
 import com.example.shopping.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,45 +13,31 @@ public class UserService {
     @Autowired
     UserDao userDao;
 
-//    @Resource
-//    SessionFactory sessionFactory;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     /**
-     * 删除用户
+     * 根据用户名获取具体用户
      */
-    public String deleteUser(Integer id){
-        userDao.deleteById(id);
-        return "success";
+    public User getUser(String userName){
+        User user = userDao.findByUsername(userName);
+        return user;
     }
 
     /**
      * 获取用户列表
      */
     public List<User> getAllUser(){
-//        List<User> users = userDao.findAllByOrderById();
-//        return users;
-        return null;
-//        JSONObject result = new JSONObject();
-//        JSONArray userList = new JSONArray();
-//        List<User> users = userDao.findAllByOrderById();
-//        for(User user:users){
-//            JSONObject tmp = new JSONObject();
-//            tmp.put("id",user.getId().toString());
-//            tmp.put("name",user.getName());
-//            tmp.put("email",user.getEmail());
-//            tmp.put("sex",user.getUserDetail().getSex());
-//            userList.add(tmp);
-//        }
-//        result.put("count",userList.size());
-//        result.put("success",true);
-//        return result;
+        List<User> users = userDao.findAll();
+        return users;
     }
 
     /**
      * 修改用户信息
      */
-    public String updateUser(Integer id){
-        User user = userDao.getOne(id);
+    public String updateUser(String userName){
+        User user = userDao.getOne(userName);
         return "success";
     }
 
@@ -59,6 +46,24 @@ public class UserService {
      */
     public void addUser(User user){
         userDao.save(user);
+//        User user1 = userDao.findByUsername(user.getUsername());
+//        if(user1!=null){
+//            return "注册失败，用户名已存在！";
+//        }else {
+//            user1 = new User();
+//            user.setUsername(user.getUsername());
+//            user.setEmail(user.getEmail());
+//            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//            user.setSex(user.getSex());
+//            return "success";
+//        }
+    }
+
+    /**
+     *删除用户
+     */
+    public void deleteUser(String userName){
+        userDao.deleteByUsername(userName);
     }
 
     public boolean login(User user) {

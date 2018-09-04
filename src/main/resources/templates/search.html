@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>小小购物 搜索结果</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<div th:include="/common/header :: header"></div>
+<!--中间内容-->
+<div class="container">
+    <div class="row control-main-container">
+        <div th:each="product:${products}">
+            <div class="col-md-3">
+                <p>
+                    <a th:href="@{'/shopping/detail/'+${product.productId}}">
+                        <img th:src="${product.imageUrl}" th:width="128" th:height="128"></a></p>
+                <p><h4 th:text="${product.productName}"></h4></p>
+                <p>价格：<span th:text="${product.price}"></span></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
