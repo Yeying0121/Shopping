@@ -49,8 +49,11 @@ div:hover {
 }
 
 .control-main-container {
-  padding: 55px 20px 20px 20px;
+  /*padding: 55px 20px 20px 20px;*/
+    padding-top: 55px;
+	text-align: center;
 }
+
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;

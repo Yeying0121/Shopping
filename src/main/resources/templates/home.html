@@ -18,14 +18,12 @@
 <div class="container">
 <div th:include="/common/header :: header"></div>
     <div class="row control-main-container" style="margin-top: 20px">
-        <div th:each="product:${products}">
-            <div class="col-md-3">
-                <p>
-                    <a th:href="@{'/shopping/detail/'+${product.productId}}">
-                <img th:src="${product.imageUrl}" th:width="128" th:height="128"></a></p>
-                <p><h4 th:text="${product.productName}"></h4></p>
-                <p>价格：<span th:text="${product.price}"></span></p>
-            </div>
+        <div class="col-md-3" th:each="product:${products}">
+            <p>
+                <a th:href="@{'/shopping/detail/'+${product.productId}}">
+            <img th:src="${product.imageUrl}" th:width="128" th:height="128"></a></p>
+            <p><h4 th:text="${product.productName}"></h4></p>
+            <p>价格：<span th:text="${product.price}"></span></p>
         </div>
     </div>
 </div>

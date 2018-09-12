@@ -15,9 +15,8 @@ $("#addCounts").click(function(){
 
 $("#addShoppingCar").click(function(){
     var productId = document.getElementById("productId").innerText;
-    alert(productId);
     var counts = document.getElementById("productCounts").value;
-    alert(counts);
+    console.log({name: 'shopping-car', productId: productId, counts: counts})
     $.ajax({
         async:true,
         type:'post',
@@ -30,7 +29,8 @@ $("#addShoppingCar").click(function(){
         dataType:"json",
         success:function(result){
             if(result.flag==1){
-                alert(result.res);
+                console.log({name: 'shopping-car', counts: counts})
+                // alert(result.res);
             }
         }
     })
