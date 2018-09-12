@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
 <head th:fragment="header">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <script th:src="@{/js/header.js}"></script>
 </head>
 <body th:fragment="header">
 <div>
@@ -23,26 +26,26 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="nav navbar-nav" style="margin-top: 15px">
-            <!–匿名–>
-            <a sec:authorize="isAnonymous()">
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a href="/shoppingCar/" id="shoppingCar">购物车</a></li>
+                <li><a th:href="@{/shopping/shopping_record}">订单状态</a></li>
+                <li><a th:href="@{/users/amend_info}">个人资料</a></li>
+                <!--<li><a th:href="@{/logout}">注销登录</a></li>-->
+                <li sec:authorize="hasAuthority('admin')"><a th:href="@{/control}">控制台</a></li>
+                <li sec:authorize="hasAuthority('admin')"><a th:href="@{/shopping/shopping_handle}">处理订单</a></li>
+
+            </ul>
+
+            <!--匿名-->
+            <div sec:authorize="isAnonymous()">
                 <a th:href="@{/users/login}">登录</a>
                 <a th:href="@{/users/register}" methods="post">注册</a>
-            </a>
-            <!–登录–>
-            <span sec:authorize="isAuthenticated()">
-                <span>欢迎您：<span sec:authentication="principal.username"></span></span>
-                <span>您的Id为：<span id="userId"></span></span>
-                    <span><a href="/shoppingCar/" id="shoppingCar">购物车</a></span>
-                    <span><a th:href="@{/users/amend_info}">个人资料修改</a></span>
-                    <span><a th:href="@{/shopping/shopping_record}">订单状态</a></span>
-                <span sec:authorize="hasAuthority('admin')">
-                    <span><a th:href="@{/control}" methods="post">控制台</a></span>
-                    <span><a th:href="@{/shopping/shopping_handle}">处理订单</a></span>
-                </span>
-                <span><a th:href="@{/logout}">注销登录</a></span>
+            </div>
+            <!--登录-->
+            <span >
+
             </span>
-            </ul>
 
             <form class="navbar-form navbar-right" th:action="@{/shopping/search}">
                 <div class="form-group">
@@ -50,6 +53,22 @@
                 </div>
                 <button class="btn btn-default" type="submit">查找商品</button>
             </form>
+
+            <div sec:authorize="isAuthenticated()" class="navbar-form navbar-right">
+                <div id="user-avatar"
+                     data-toggle="popover"
+                     data-placement="bottom"
+                     title="个人信息"
+                >
+                    <img src="http://p0.ifengimg.com/pmop/2018/0808/38311815C6580D24FBEEA4B87B995EC31E914A9F_size34_w600_h600.jpeg" />
+                </div>
+                <div id="user-avatar-content" style="display: none;">
+                    <div>欢迎您：<span sec:authentication="principal.username"></span></div>
+                    <div>您的Id为：<span id="userId"></span></div>
+                    <button id="user-logout">退出登录</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </nav>

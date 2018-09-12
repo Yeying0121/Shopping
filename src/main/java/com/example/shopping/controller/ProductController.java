@@ -28,7 +28,6 @@ public class ProductController {
     @GetMapping("/main")
     public String getProductList(Model model){
         List<Product> products = productService.getAllProducts();
-
         model.addAttribute("products",products);
         return "home";
     }
@@ -61,6 +60,6 @@ public class ProductController {
     public String searchProduct(String productName,Model model){
         List<Product> products = productService.searchProduct(productName);
         model.addAttribute("products",products);
-        return "search";
+        return "home";
     }
 }
