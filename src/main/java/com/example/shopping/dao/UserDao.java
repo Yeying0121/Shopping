@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface UserDao extends JpaRepository<SysUser,String> {
+public interface UserDao extends JpaRepository<SysUser,Integer> {
 
     SysUser findByUsername(String userName);
 

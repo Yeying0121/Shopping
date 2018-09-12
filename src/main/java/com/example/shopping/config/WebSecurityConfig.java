@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/js/**", "/jquery/**", "/templates/**", "/users/dologin").permitAll()
+                .antMatchers("/css/**", "/js/**", "/jquery/**", "/templates/**", "/users/dologin","/users/register","/users/doRegister","/shopping/main", "/shoppingCar/save").permitAll()
 //                .antMatchers("/admin/**").hasAnyRole("ADMIN")
 //                .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/shopping/main")
                 .failureUrl("/403")
                 .permitAll()
-                // 开启cookie
+//                 开启cookie
                 .and()
                 .rememberMe()
                 //设置cookie有效期
@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+        http.logout().logoutSuccessUrl("/users/login");
         http.csrf().disable();
     }
 

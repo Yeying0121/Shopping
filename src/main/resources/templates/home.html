@@ -17,7 +17,7 @@
 <body>
 <div class="container">
 <div th:include="/common/header :: header"></div>
-    <div class="row control-main-container">
+    <div class="row control-main-container" style="margin-top: 20px">
         <div th:each="product:${products}">
             <div class="col-md-3">
                 <p>
@@ -28,7 +28,6 @@
             </div>
         </div>
     </div>
-    <button class="col-md-2" onclick="on()">点我</button>
 </div>
 <div th:include="/common/footer :: footer"></div>
 </body>

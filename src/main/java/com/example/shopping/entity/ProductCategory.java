@@ -19,7 +19,7 @@ public class ProductCategory {
     @Column(name = "createTime")
     private Date createTime;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "categoryId")
     private Set<Product> productSet;
 
     public Integer getCategoryId() {

@@ -5,43 +5,31 @@
     <meta name="viewport" content="width=device-width">
     <title>小小购物</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link th:href="@{css/bootstrap-theme.css}" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <link th:href="@{/css/signin.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="container-fluid">
-<!--<div th:include="/common/header :: header"></div>-->
+<div th:include="/common/header :: header"></div>
 <!-- 中间内容 -->
 <div class="center-block">
-<form th:action="@{/users/doRegister}" method="post" th:object="${user}" onsubmit="return fun1()">
-    <center><h2 class="title center">注册</h2>
+<div>
+    <center><h2 class="title center">个人信息修改</h2>
     <br/>
     <p style="color: red" th:text="${msg}" th:if="${ not #strings.isEmpty(msg)}"></p></center>
     <div class="col-sm-offset-2 col-md-offest-2">
         <!-- 表单输入 -->
         <div  class="form-horizontal">
             <div class="form-group">
-                <label for="inputUserName" class="col-sm-2 col-md-2 control-label">用户名</label>
+                <label for="userName" class="col-sm-2 col-md-2 control-label">用户名</label>
                 <div class="col-sm-6 col-md-6">
-                    <input type="text" class="form-control" id="inputUserName" placeholder="请输入用户名" name="username" required="required"/>
+                    <input type="text" class="form-control" id="userName" placeholder="请输入用户名" name="username" required="required"/>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-sm-2 col-md-2 control-label">邮箱</label>
+                <label for="email" class="col-sm-2 col-md-2 control-label">邮箱</label>
                 <div class="col-sm-6 col-md-6">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="请输入正确的邮箱格式" name="email"/>
-                </div>
-            </div>
-            <!--<div class="form-group">-->
-                <!--<label for="inputNickname" class="col-sm-2 col-md-2 control-label">昵称</label>-->
-                <!--<div class="col-sm-6 col-md-6">-->
-                    <!--<input type="text" class="form-control" id="inputNickname" placeholder="高帅富" />-->
-                <!--</div>-->
-            <!--</div>-->
-            <div class="form-group">
-                <label for="inputPassword" class="col-sm-2 col-md-2 control-label">密码</label>
-                <div class="col-sm-6 col-md-6">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="禁止输入非法字符" name="password" required="required"/>
+                    <input type="email" class="form-control" id="email" placeholder="请输入正确的邮箱格式" name="email"/>
                 </div>
             </div>
             <div class="radio form-group">
@@ -56,24 +44,19 @@
                 </div>
             </div>
             <br>
-            <!--<div>-->
-                <!--<label for="birthday" class="col-sm-2 col-md-2 control-label">出生日期</label>-->
-                <!--<div class="col-sm-6 col-md-6">-->
-                    <!--<input type="text" class="form-control" id="birthday" placeholder="请输入出生日期" />-->
-                <!--</div>-->
-            <!--</div>-->
-
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-6">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+                    <button class="btn btn-lg btn-primary btn-block" id="save">保存</button>
                 </div>
             </div>
         </div>
         <br/>
     </div>
-</form>
+    </div>
     </div>
 </div>
+</div>
+<script th:src="@{/js/amend_info.js}"></script>
 </body>
 <script>
     function isEmail(str) {
@@ -88,5 +71,6 @@
         }
         return true;
     }
+
 </script>
 </html>

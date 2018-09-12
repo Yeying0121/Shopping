@@ -30,7 +30,7 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "Category")
-    private ProductCategory productCategory;
+    private ProductCategory categoryId;
 
     @Column(name = "CreateTime")
     private Date createTime;
@@ -57,14 +57,6 @@ public class Product {
 
     public void setProductStock(Integer productStock) {
         this.productStock = productStock;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
     }
 
     public Date getCreateTime() {
@@ -98,5 +90,13 @@ public class Product {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    public ProductCategory getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(ProductCategory categoryId) {
+        this.categoryId = categoryId;
     }
 }

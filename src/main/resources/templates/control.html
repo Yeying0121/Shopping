@@ -29,11 +29,12 @@
                 <li class="list-group-item-diy"><a href="#section1">查看所有用户<span class="sr-only">(current)</span></a></li>
                 <li class="list-group-item-diy"><a href="#section2">查看所有商品</a></li>
                 <li class="list-group-item-diy"><a href="#section3">添加商品</a></li>
+                <li class="list-group-item-diy"><a href="#section4">商品分类管理</a></li>
             </ul>
         </div>
         <!-- 控制内容 -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 control-main-container">
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-top: -200px">
                 <h1><a name="section1">用户信息</a></h1>
                 <hr/>
                 <table class="table table-hover center" id="userTable">
@@ -43,17 +44,17 @@
                         <td>邮箱</td>
                         <td>用户权限</td>
                         <td>注册时间</td>
-                        <!--<td>性别</td>-->
+                        <td>性别</td>
                         <td style="text-align: center" colspan="2">操作</td>
                     </tr>
                     <tr th:each="user: ${users}">
                         <!--<td th:text="${user.id}"></td>-->
                         <td th:text="${user.username}"></td>
                         <td th:text="${user.email}"></td>
-                        <td th:text="${user.role}"></td>
+                        <td th:text="${user.getAuthorities()}"></td>
                         <td th:text="${user.registerTime}"></td>
-                        <!--<td th:text="${user.sex}"></td>-->
-                        <td><a class="btn btn-primary" th:href="@{'/users/delete/'+${user.username}}">删除</a></td>
+                        <td th:text="${user.sex}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/users/delete/'+${user.id}}" onclick="return delete_confirm()">删除</a></td>
                     </tr>
                 </table>
             </div>
@@ -82,54 +83,44 @@
                         <div class="form-group">
                             <label for="productName" class="col-sm-2 col-md-2 control-label">商品名称</label>
                             <div class="col-sm-6 col-md-6">
-                                <input type="text" class="form-control" id="productName" placeholder="手机" name="productName" />
+                                <input type="text" class="form-control" id="productName" placeholder="手机" name="productName" required="required"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="productDescribe" class="col-sm-2 col-md-2 control-label">商品描述</label>
                             <div class="col-sm-6 col-md-6">
-                                <textarea type="text" class="form-control" id="productDescribe" placeholder="全面屏" name="productDesc"></textarea>
-                            </div>
+                            <input type="text" class="form-control" id="productDescribe" placeholder="全面屏" name="desc" required="required"/>
+                        </div>
                         </div>
                         <div class="form-group">
                             <label for="productPrice" class="col-sm-2 col-md-2 control-label">商品价格</label>
                             <div class="col-sm-6 col-md-6">
-                                <input type="text" class="form-control" id="productPrice" placeholder="3999" name="price"/>
+                                <input type="text" class="form-control" id="productPrice" placeholder="3999" name="price" required="required"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="productCount" class="col-sm-2 col-md-2 control-label">商品数量</label>
                             <div class="col-sm-6 col-md-6">
-                                <input type="text" class="form-control" id="productCount" placeholder="100" name="productStock" />
+                                <input type="text" class="form-control" id="productCount" placeholder="100" name="productStock" required="required"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="productType" class="col-sm-2 col-md-2 control-label">商品类别</label>
                             <div class="col-sm-6 col-md-6">
-                                <!--<span class="dropdown">-->
-                                    <!--<a class="dropdown-toggle" data-target="dropdown">-->
-                                        <!--商品种类<b class="caret"></b>-->
-                                    <!--</a>-->
-                                <!--</span>-->
-                                <!--<ul class="dropdown-menu" name="productType" id="productType">-->
-                                    <!--<li th:each="category:${categories}">-->
-                                        <!--<a th:name="${category.categoryName}" th:abbr="${category.categoryId}" onclick="selectCategory(this)"-->
-                                           <!--th:text="${category.categoryName}"></a>-->
-                                    <!--</li>-->
-                                <!--</ul>-->
                                 <select name="productCategory" class="form-control" id="productType">
-                                    <option th:each="category:${categories}" th:value="${category.categoryId}" th:text=" ${category.categoryName}"></option>
+                                    <option onclick="selectCategory(this)" th:abbr="${category.categoryId}" th:each="category:${categories}"  th:text=" ${category.categoryName}" name="category"></option>
                                     <!--</li>-->
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="productImgUpload" class="col-sm-2 col-md-2 control-label" accept="image/jpg">商品图片</label>
+                            <label for="productImg" class="col-sm-2 col-md-2 control-label" accept="image/jpg">商品图片</label>
                             <div class="col-sm-6 col-md-6">
-                                <input name="productImgUpload" type="file"  id="productImgUpload"/>
-                                <p class="help-block">上传的图片大小应为280*160大小</p>
+                                <input type="text" class="form-control" id="productImg" placeholder="请输入商品图片链接" name="imageUrl" required="required"/>
                             </div>
-                            <button class="btn btn-primary col-sm-2 col-md-2" onclick="fileUpload()">上传图片</button>
+                                <!--<p class="help-block">上传的图片大小应为280*160大小</p>-->
+                            </div>
+                            <!--<button class="btn btn-primary col-sm-2 col-md-2" onclick="fileUpload()">上传图片</button>-->
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6" id="imgPreSee">
@@ -137,76 +128,58 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
+                                <p style="color: red" th:text="${msg}"></p>
                                 <button class="btn btn-lg btn-primary btn-block" type="submit" >添加商品</button>
                             </div>
                         </div>
                     </div>
-                    <br/>
-                </div>
+                    <br>
                 </form>
+                </div>
+
+            <div class="col-md-12">
+                <hr/>
+                <h1><a name="section4">商品分类管理</a></h1>
+                <hr/>
+                <table class="table table-hover center" id="catTable">
+                    <tr class="info">
+                        <td>分类ID</td>
+                        <td>分类名称</td>
+                        <td>编辑时间</td>
+                        <td style="text-align: center" colspan="2">操作</td>
+                    </tr>
+                    <tr th:each="category: ${categories}">
+                        <!--<td th:text="${user.id}"></td>-->
+                        <td th:text="${category.categoryId}"></td>
+                        <td th:text="${category.categoryName}"></td>
+                        <td th:text="${category.createTime}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/category/delete/'+${category.categoryId}}" onclick="return delete_confirm()">删除</a></td>
+                    </tr>
+                </table>
+                <hr/>
+                <h3>添加商品分类</h3>
+                <hr/>
+                <div class="form-group">
+                    <label for="productCat" class="col-sm-2 col-md-2 control-label">分类名称</label>
+                    <div class="col-sm-6 col-md-6">
+                        <input type="text" class="form-control" id="productCat" placeholder="生活用品" name="productCat" required="required"/>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <div class="col-sm-2" style="float: right">
+                        <a class="btn btn-primary btn-block" type="submit" id="addCat">添加商品分类</a>
+                    </div>
+                </div>
+                <br>
+            </div>
             </div>
         </div>
+    <br>
+
     </div>
-</div>
-
-<!--<script type="text/javascript">-->
-    <!--function delcfm(url) {-->
-        <!--$('#url').val(url);-->
-        <!--$('#delcfmModel').model();-->
-    <!--}-->
-
-    <!--function urlSubmit() {-->
-        <!--var url=$.trim($("#url").val());-->
-        <!--window.location.href=url;-->
-    <!--}-->
-<!--</script>-->
-<!--<script type="text/javascript">-->
-    <!--function listAllProducts() {-->
-        <!--var productArea = document.getElementById("productArea");-->
-        <!--var allProducts = getAllProducts();-->
-        <!--var html = "";-->
-        <!--productArea.innerHTML = '';-->
-        <!--for(var i=0;i<allProduct.length;i++){-->
-            <!--var imgURL = "${cp}/img/"+allProduct[i].id+".jpg";-->
-            <!--html+='<div class="col-sm-4 col-md-4 pd-5">'+-->
-                <!--'<div class="boxes">'+-->
-                <!--'<div class="big bigimg">'+-->
-                <!--'<img src="'+imgURL+'">'+-->
-                <!--'</div>'+-->
-                <!--'<p class="font-styles center">'+allProduct[i].name+'</p>'+-->
-                <!--'<p class="pull-right">价格：'+allProduct[i].price+'</p>'+-->
-                <!--'<p class="pull-left">库存：'+allProduct[i].counts+'</p>'+-->
-                <!--'<div class = "row">'+-->
-                <!--'<button class="btn btn-primary delete-button" type="submit" onclick="deleteProduct('+allProduct[i].id+')">删除商品</button>'+-->
-                <!--'</div>'+-->
-                <!--'</div>'+-->
-                <!--'</div>';-->
-        <!--}-->
-        <!--productArea.innerHTML+=html;-->
-    <!--}-->
-    <!---->
-<!--</script>-->
-<!--<div class="modal fade" id="delcfmModel">-->
-    <!--<div class="modal-dialog">-->
-        <!--<div class="modal-content message_align">-->
-            <!--<div class="modal-header">-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
-                <!--<h4 class="modal-title">提示信息</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                <!--<p>您确认要删除吗？</p>-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<input type="hidden" id="url"/>-->
-                <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-                <!--<a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>-->
-            <!--</div>-->
-        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
 <script>
     function delete_confirm() {
-        var msg = "您真的确定要删除吗？";
+        var msg = "您确定要删除吗？";
         if (confirm(msg)==true){
             return true;
         }else{
@@ -214,5 +187,6 @@
         }
     }
 </script>
+<script th:src="@{/js/control.js}"></script>
 </body>
 </html>

@@ -22,6 +22,15 @@ public class SysUser implements UserDetails {
     @Column(name = "Password")
     private String password;
 
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "RegisterTime")
+    private Date registerTime;
+
+    @Column(name = "Sex")
+    private String sex;
+
     @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     private List<SysRole> roles;
 
@@ -85,5 +94,29 @@ public class SysUser implements UserDetails {
 
     public void setRoles(List<SysRole> roles) {
         this.roles = roles;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -11,15 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface ProductDao extends JpaRepository<Product,String> {
+public interface ProductDao extends JpaRepository<Product,Integer> {
     @Override
     List<Product> findAll();
 
-    Product findByProductId(String productId);
+    Product findByProductId(Integer productId);
+
+    Product findByProductName(String productName);
 
     @Modifying
     @Transactional
-    void deleteByProductId(String productId);
+    void deleteByProductId(Integer productId);
 
     @Query("from Product where productName like %:productName%")
     List<Product> findByProductNameLike(@Param("productName") String productName);

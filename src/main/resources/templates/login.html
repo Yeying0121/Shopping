@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>用户登陆</title>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
     <link th:href="@{/css/bootstrap-theme.css}" rel="stylesheet"/>
     <link th:href="@{/css/signin.css}" rel="stylesheet"/>
+    <!--<script th:src="@{/js/login.js}"></script>-->
     <style type="text/css">
         .password-label {
             float: right;
@@ -36,7 +38,7 @@
                 <a href="/users/register">忘记密码</a>
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">登录</button>
         <input class="btn btn-lg btn-primary btn-block" type="button" onclick="regist()" value="注册"/>
     </form>
 </div>

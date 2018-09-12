@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>小小购物</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="/common/header :: header"></div>
+<div class="container-fluid bigHead">
+    <div class="row">
+        <div class="col-sm-10  col-md-10 col-sm-offset-1 col-md-offset-1" style="margin-top: 45px">
+            <div class="jumbotron">
+                <h1>欢迎来到订单页</h1>
+                <p>您的购买清单为</p>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 control-main-container">
+            <div class="row">
+                <ul class="nav nav-tabs list-group-diy" role="tablist">
+                    <li role="presentation" class="active list-group-item-diy"><a href="#unHandle" aria-controls="unHandle" role="tab" data-toggle="tab">待发货订单：<span class="badge" id="unHandleCount">0</span></a></li>
+                    <li role="presentation" class="list-group-item-diy"><a href="#transport" aria-controls="transport" role="tab" data-toggle="tab">运输中订单：<span class="badge" id="transportCount">0</span></a></li>
+                    <li role="presentation" class="list-group-item-diy"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">已收货订单：<span class="badge" id="receiveCount">0</span></a></li>
+                    <li role="presentation" class="list-group-item-diy"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">全部订单：<span class="badge" id="allCount">0</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="unHandle">
+                       <table class="table table-hover center" id="unHandlerTable">
+                <tr class="info">
+                    <td>商品名称</td>
+                    <td>购买数量</td>
+                    <td>付款金额</td>
+                    <td>订单状态</td>
+                </tr>
+                <tr th:each="order: ${orders}">
+                    <td th:text="${order.getUser().getUsername()}"></td>
+                    <td th:text="${order.counts}"></td>
+                    <td th:text="${order.price}"></td>
+                    <td th:text="${order.orderStatus}"></td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                <button type="button" class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4" id="confirmBuy">确认购买</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

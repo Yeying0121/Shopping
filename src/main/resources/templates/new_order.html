@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>小小购物</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link th:href="@{/css/signin.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div th:include="/common/header :: header"></div>
+    <!-- 中间内容 -->
+    <div class="center-block">
+        <div>
+            <center><h2 class="title center">创建新订单</h2>
+                <br/>
+                <div class="col-sm-offset-2 col-md-offest-2">
+                    <!-- 表单输入 -->
+                    <div  class="form-horizontal">
+                        <div class="form-group">
+                            <label for="receiver" class="col-sm-2 col-md-2 control-label">收货人</label>
+                            <div class="col-sm-6 col-md-6">
+                                <input type="text" class="form-control" id="receiver" placeholder="请输入用户名" name="receiver" required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 col-md-2 control-label">收货地址</label>
+                            <div class="col-sm-6 col-md-6">
+                                <input type="text" class="form-control" id="address" placeholder="请输入收货地址" name="address"  required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber" class="col-sm-2 col-md-2 control-label">收货人电话</label>
+                            <div class="col-sm-6 col-md-6">
+                                <input type="text" class="form-control" id="phoneNumber" placeholder="请输入收货人电话" name="phoneNumber"  required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName" class="col-sm-2 col-md-2 control-label">商品名称</label>
+                            <div class="col-sm-6 col-md-6">
+                                <input type="text" class="form-control" id="productName" name="productName"  readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName" class="col-sm-2 col-md-2 control-label">购买数量</label>
+                                <div class="btn-group" role="group" style="margin-left: -755px">
+                                    <button type="button" class="btn btn-default" id="subCounts">-</button>
+                                    <input id="productCounts" type="button" class="btn btn-default" value="1">
+                                    <button type="button" class="btn btn-default" id="addCounts">+</button>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-sm-2 col-md-2 control-label">小计</label>
+                            <div class="col-sm-6 col-md-6">
+                                <span type="text" class="form-control" id="price" name="price" ></span>
+                            </div>
+                        </div>
+                    <br>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-2 col-sm-2"></div>
+                            <button type="button" class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4" id="confirmBuy">确认购买</button>
+                        </div>
+                        </div>
+                </div>
+            </center>
+        </div>
+    </div>
+</div>
+</body>
+</html>

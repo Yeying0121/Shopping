@@ -11,5 +11,5 @@ public interface ShoppingCarDao extends JpaRepository<ShoppingCar,Integer> {
 
     List<ShoppingCar> findByUserId(Integer userId);
 
-    ShoppingCar findByUserIdAndProductId(Integer userId,String productId);
+    ShoppingCar findByUserIdAndProductId(Integer userId,Integer productId);
 }

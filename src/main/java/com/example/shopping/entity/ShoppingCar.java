@@ -18,7 +18,10 @@ public class ShoppingCar {
     private SysUser user;
 
     @Column(name = "productId")
-    private String productId;
+    private Integer productId;
+
+    @Column(name = "productName")
+    private String productName;
 
     @Column(name = "productPrice")
     private Integer productPrice;
@@ -51,11 +54,11 @@ public class ShoppingCar {
         this.user = user;
     }
 
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -66,5 +69,13 @@ public class ShoppingCar {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

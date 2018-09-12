@@ -24,7 +24,7 @@ public class ProductService {
     /**
      * 根据商品Id获取商品
      */
-    public Product getProductInfo(String id){
+    public Product getProductInfo(Integer id){
         Product product = productDao.findByProductId(id);
 //        JSONObject result = new JSONObject();
 //        result.put("商品名称",product.getProductName());
@@ -38,14 +38,22 @@ public class ProductService {
     /**
      *新增商品
      */
-    public void addProduct(Product product){
-        productDao.save(product);
+    public Integer addProduct(Product product) {
+        Product product1 = productDao.findByProductName(product.getProductName());
+        if (product1 == null) {
+            productDao.save(product);
+            return  1;
+        } else {
+//            product1.setProductStock(product1.getProductStock()+product.getProductStock());
+//            product1.setPrice(product.getPrice());
+//            product1.setImageUrl(product.getImageUrl());
+            return 0;
+        }
     }
-
     /**
      * 删除商品
      */
-    public void deleteProduct(String productId){
+    public void deleteProduct(Integer productId){
         productDao.deleteByProductId(productId);
     }
 
