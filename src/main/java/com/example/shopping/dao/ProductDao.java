@@ -1,6 +1,7 @@
 package com.example.shopping.dao;
 
 import com.example.shopping.entity.Product;
+import com.example.shopping.entity.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,8 @@ public interface ProductDao extends JpaRepository<Product,Integer> {
     Product findByProductId(Integer productId);
 
     Product findByProductName(String productName);
+
+    List<Product> findByCategoryId(ProductCategory productCategory);
 
     @Modifying
     @Transactional

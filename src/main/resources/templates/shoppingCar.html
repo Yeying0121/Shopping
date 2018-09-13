@@ -22,28 +22,32 @@
         <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 control-main-container">
             <table class="table table-hover center" id="shoppingcar">
                 <tr class="info">
-                    <!--<td>用户ID</td>-->
+                    <td style="display: none">Id</td>
+                    <td style="display: none">商品编号</td>
                     <td>是否购买</td>
                     <td>商品名称</td>
-                    <td>商品小计</td>
+                    <td>商品单价</td>
                     <td>商品数量</td>
                     <td style="text-align: center" colspan="2">操作</td>
                 </tr>
                 <tr th:each="shoppingCar: ${shoppingCars}">
-                    <td><input type="checkbox"></td>
-                    <td th:text="${shoppingCar.productName}"></td>
-                    <td th:text="${shoppingCar.productPrice}"></td>
-                    <td th:text="${shoppingCar.counts}"></td>
+                    <td><input type="checkbox" id="check"></td>
+                    <td th:text="${shoppingCar.id}" style="display: none"></td>
+                    <td th:text="${shoppingCar.productId}" style="display: none" id="productId"></td>
+                    <td th:text="${shoppingCar.productName}" id="productName"></td>
+                    <td th:text="${shoppingCar.productPrice}" id="price"></td>
+                    <td th:text="${shoppingCar.counts}" id="productCounts"></td>
                     <td><a class="btn btn-primary" th:href="@{'/shoppingCar/delete?id='+${shoppingCar.id}}" onclick="return delete_confirm()">删除</a></td>
                 </tr>
             </table>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4"></div>
-                <button type="button" class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4" id="confirmBuy">确认购买</button>
+                <button type="button" class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4" id="buy">确认购买</button>
             </div>
         </div>
     </div>
 </div>
+<script th:src="@{/js/shoppingCar.js}"></script>
 <script>
     function delete_confirm() {
         var msg = "您确定要删除吗？";

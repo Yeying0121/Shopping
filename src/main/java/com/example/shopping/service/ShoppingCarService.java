@@ -46,11 +46,11 @@ public class ShoppingCarService {
             shoppingCar1.setProductId(productId);
             shoppingCar1.setCounts(counts);
             shoppingCar1.setProductName(product.getProductName());
-            shoppingCar1.setProductPrice(product.getPrice()*counts);
+            shoppingCar1.setProductPrice(product.getPrice());
             shoppingCarDao.save(shoppingCar1);
         }else {
             shoppingCar.setCounts(shoppingCar.getCounts()+counts);
-            shoppingCar.setProductPrice(productService.getProductInfo(productId).getPrice()*shoppingCar.getCounts());
+            shoppingCar.setProductPrice(productService.getProductInfo(productId).getPrice());
             shoppingCarDao.save(shoppingCar);
         }
         result.put("flag",1);

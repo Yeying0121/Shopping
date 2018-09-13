@@ -30,9 +30,15 @@ public class OrderController {
     ProductDao productDao;
 
     @GetMapping("/shopping_record")
-    public String getOrders(Integer userId, Model model){
+    public String getOrders(@RequestParam Integer userId, Model model){
         List<Order> orders = orderService.getOrderList(userId);
+        List<Order> orders1 = orderService.getUnHandleOrder(userId);
+        List<Order> orders2 = orderService.getTransportOrder(userId);
+        List<Order> orders3 = orderService.getReciveOrder(userId);
         model.addAttribute("orders",orders);
+        model.addAttribute("orders1",orders1);
+        model.addAttribute("orders2",orders2);
+        model.addAttribute("orders3",orders3);
         return "shopping_record";
     }
 

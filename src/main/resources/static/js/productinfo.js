@@ -14,26 +14,31 @@ $("#addCounts").click(function(){
 })
 
 $("#addShoppingCar").click(function(){
-    var productId = document.getElementById("productId").innerText;
-    var counts = document.getElementById("productCounts").value;
-    console.log({name: 'shopping-car', productId: productId, counts: counts})
-    $.ajax({
-        async:true,
-        type:'post',
-        url:'/shoppingCar/save',
-        data:JSON.stringify({
-            productId:productId,
-            counts:counts,
-        }),
-        contentType: "application/json;charset=UTF-8",
-        dataType:"json",
-        success:function(result){
-            if(result.flag==1){
-                console.log({name: 'shopping-car', counts: counts})
-                // alert(result.res);
+    if(document.getElementById("login")!=null){
+        alert("您还未登录，请先登录!");
+        window.location.href="/users/login";
+    }else {
+        var productId = document.getElementById("productId").innerText;
+        var counts = document.getElementById("productCounts").value;
+        console.log({name: 'shopping-car', productId: productId, counts: counts})
+        $.ajax({
+            async: true,
+            type: 'post',
+            url: '/shoppingCar/save',
+            data: JSON.stringify({
+                productId: productId,
+                counts: counts,
+            }),
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (result) {
+                if (result.flag == 1) {
+                    console.log({name: 'shopping-car', counts: counts})
+                    alert(result.res);
+                }
             }
-        }
-    })
+        })
+    }
 })
 $("#buy").click(function () {
     var productName = document.getElementById("productName").innerText;

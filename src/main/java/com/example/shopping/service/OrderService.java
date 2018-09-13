@@ -41,6 +41,29 @@ public class OrderService {
     }
 
     /**
+     * 获取待发货订单
+     */
+    public List getUnHandleOrder(Integer userId){
+        List<Order> orders = orderDao.findByOrderStatusLikeAndUserId("待发货",userId);
+        return orders;
+    }
+
+    /**
+     * 获取运输中订单
+     */
+    public List getTransportOrder(Integer userId){
+        List<Order> orders = orderDao.findByOrderStatusLikeAndUserId("配送中",userId);
+        return orders;
+    }
+    /**
+     * 获取已收货订单
+     */
+    public List getReciveOrder(Integer userId){
+        List<Order> orders = orderDao.findByOrderStatusLikeAndUserId("已收货",userId);
+        return orders;
+    }
+
+    /**
      * 新增订单
      */
     public JSONObject addOrder(Integer userId,Integer productId,Integer counts,String address,Integer phoneNumber,String recevier){

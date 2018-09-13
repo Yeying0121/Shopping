@@ -21,6 +21,7 @@ public class ProductService {
     @Autowired
     CategoryDao categoryDao;
 
+
     /**
      * 获取所有商品的列表
      */
@@ -45,10 +46,10 @@ public class ProductService {
     /**
      *新增商品
      */
-    public String addProduct(Product product) {
-        JSONObject result = new JSONObject();
+    public Integer addProduct(Product product) {
+//        JSONObject result = new JSONObject();
         Product product1 = productDao.findByProductName(product.getProductName());
-        ProductCategory productCategory = categoryDao.getOne(product.getCategoryId().getCategoryId());
+        ProductCategory productCategory = categoryDao.findByCategoryName(product.getCategoryId().getCategoryName());
         if (product1 == null) {
             product1 = new Product();
             product1.setProductName(product.getProductName());
@@ -59,11 +60,11 @@ public class ProductService {
             product1.setCategoryId(productCategory);
             product1.setCreateTime(new Date());
             productDao.save(product1);
-            result.put("res","添加商品成功！");
-            return  result.toJSONString();
+//            result.put("res","添加商品成功！");
+            return  1;
         } else {
-            result.put("res","添加商品失败，此商品已存在!");
-            return result.toJSONString();
+//            result.put("res","添加商品失败，此商品已存在!");
+            return 0;
         }
     }
     /**
@@ -76,8 +77,14 @@ public class ProductService {
     /**
      * 搜索商品
      */
-    public List<Product> searchProduct(String productName){
-        List<Product> products = productDao.findByProductNameLike(productName);
-        return products;
+    public List searchProduct(String keyWords) {
+        List<Product> products = productDao.findByProductNameLike(keyWords);
+        if (products.size() == 0) {
+            ProductCategory productCategory = categoryDao.findByCategoryNameLike(keyWords);
+            List<Product> productList = productDao.findByCategoryId(productCategory);
+            return productList;
+        } else {
+            return products;
+        }
     }
 }

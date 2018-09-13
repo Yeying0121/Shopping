@@ -2,9 +2,10 @@ package com.example.shopping.dao;
 
 import com.example.shopping.entity.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -15,7 +16,6 @@ public interface CategoryDao extends JpaRepository<ProductCategory,Integer> {
 
     ProductCategory findByCategoryName(String catName);
 
-    @Modifying
-    @Transactional
-    void deleteByCategoryId(Integer catId);
+    @Query("from ProductCategory where categoryName like %:categoryName%")
+    ProductCategory findByCategoryNameLike(@Param("categoryName") String categoryName);
 }

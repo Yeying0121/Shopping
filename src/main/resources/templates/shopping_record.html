@@ -29,29 +29,94 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="all">
-                       <table class="table table-hover center" id="allTable">
-                <tr class="info">
-                    <td>收货人</td>
-                    <td>收货人电话</td>
-                    <td>配送地址</td>
-                    <td>商品名称</td>
-                    <td>购买数量</td>
-                    <td>付款金额</td>
-                    <td>订单状态</td>
-                </tr>
-                <tr th:each="order: ${orders}">
-                    <td th:text="${order.receiver}"></td>
-                    <td th:text="${order.phoneNumber}"></td>
-                    <td th:text="${order.address}"></td>
-                    <td th:text="${order.productName}"></td>
-                    <td th:text="${order.counts}"></td>
-                    <td th:text="${order.price}"></td>
-                    <td th:text="${order.orderStatus}"></td>
-                </tr>
-            </table>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4"></div>
-                <button type="button" class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4" id="confirmBuy">确认购买</button>
+                        <table class="table table-hover center" id="allTable">
+                            <tr class="info">
+                                <td>收货人</td>
+                                <td>收货人电话</td>
+                                <td>配送地址</td>
+                                <td>商品名称</td>
+                                <td>购买数量</td>
+                                <td>付款金额</td>
+                                <td>订单状态</td>
+                            </tr>
+                            <tr th:each="order: ${orders}">
+                                <td th:text="${order.receiver}"></td>
+                                <td th:text="${order.phoneNumber}"></td>
+                                <td th:text="${order.address}"></td>
+                                <td th:text="${order.productName}"></td>
+                                <td th:text="${order.counts}"></td>
+                                <td th:text="${order.price}"></td>
+                                <td th:text="${order.orderStatus}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="unHandle">
+                        <table class="table table-hover center" id="unHandleTable">
+                            <tr class="info">
+                                <td>收货人</td>
+                                <td>收货人电话</td>
+                                <td>配送地址</td>
+                                <td>商品名称</td>
+                                <td>购买数量</td>
+                                <td>付款金额</td>
+                                <td>订单状态</td>
+                            </tr>
+                            <tr th:each="order: ${orders1}">
+                                <td th:text="${order.receiver}"></td>
+                                <td th:text="${order.phoneNumber}"></td>
+                                <td th:text="${order.address}"></td>
+                                <td th:text="${order.productName}"></td>
+                                <td th:text="${order.counts}"></td>
+                                <td th:text="${order.price}"></td>
+                                <td th:text="${order.orderStatus}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="transport">
+                        <table class="table table-hover center" id="transportTable">
+                            <tr class="info">
+                                <td>收货人</td>
+                                <td>收货人电话</td>
+                                <td>配送地址</td>
+                                <td>商品名称</td>
+                                <td>购买数量</td>
+                                <td>付款金额</td>
+                                <td>订单状态</td>
+                            </tr>
+                            <tr th:each="order: ${orders2}">
+                                <td th:text="${order.receiver}"></td>
+                                <td th:text="${order.phoneNumber}"></td>
+                                <td th:text="${order.address}"></td>
+                                <td th:text="${order.productName}"></td>
+                                <td th:text="${order.counts}"></td>
+                                <td th:text="${order.price}"></td>
+                                <td th:text="${order.orderStatus}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="receive">
+                        <table class="table table-hover center" id="receiveTable">
+                            <tr class="info">
+                                <td>收货人</td>
+                                <td>收货人电话</td>
+                                <td>配送地址</td>
+                                <td>商品名称</td>
+                                <td>购买数量</td>
+                                <td>付款金额</td>
+                                <td>订单状态</td>
+                            </tr>
+                            <tr th:each="order: ${orders3}">
+                                <td th:text="${order.receiver}"></td>
+                                <td th:text="${order.phoneNumber}"></td>
+                                <td th:text="${order.address}"></td>
+                                <td th:text="${order.productName}"></td>
+                                <td th:text="${order.counts}"></td>
+                                <td th:text="${order.price}"></td>
+                                <td th:text="${order.orderStatus}"></td>
+                            </tr>
+                        </table>
+                    </div>
+</div>
             </div>
         </div>
     </div>

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    // var url3 = 'http://localhost:8080/logout';
+    // $('#user-logout').attr('href',url3);
     $.ajax({
         type:'post',
         url:'/users/identity',
@@ -30,4 +32,30 @@ $(document).ready(function(){
         }
     })
 
+        // var li = $("#nav").children("li");
+        //
+        // for(var i=0;i<li.length;i++){
+        //     var url = window.location.pathname;
+        //     var url = url.replace("/","");
+        //     if(url.indexOf(li[i].id)!=-1){
+        //         li[i].firstChild.className = "active";
+        //     }
+        //     else {
+        //         li[i].firstChild.className = "";
+        //     }
+        // }
+    var liobj = $("#nav li");
+    liobj.each(function () {
+        $(this).click(function () {
+            liobj.removeClass("active")
+            $(this).addClass("active");
+        })
+    })
+
+
+    // $("#nav li").click(function () {
+    //     $("#nav li").removeClass("active");
+    //         $(this).addClass("active");
+    //
+    // })
 })

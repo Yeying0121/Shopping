@@ -9,14 +9,14 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
-    <!--<script th:inline="javascript">-->
-        <!--function selectCategory(obj) {-->
-            <!--var name = $(obj).attr("name");-->
-            <!--var catId = $(obj).attr("abbr");-->
-            <!--$("#categoryBtn").html(name);-->
-            <!--$("#category-input").val(catId);-->
-        <!--}-->
-    <!--</script>-->
+    <script th:inline="javascript">
+        function selectCategory(obj) {
+            var name = $(obj).attr("name");
+            var catId = $(obj).attr("abbr");
+            $("#categoryBtn").html(name);
+            $("#category-input").val(catId);
+        }
+    </script>
 </head>
 <body>
 <div th:include="/common/header :: header"></div>
@@ -107,8 +107,24 @@
                         <div class="form-group">
                             <label for="category" class="col-sm-2 col-md-2 control-label">商品类别</label>
                             <div class="col-sm-6 col-md-6">
-                                <select name="category" class="form-control" id="category">
-                                    <option th:each="category:${categories}"  th:text=" ${category.categoryName}" name="category" th:value="${category.categoryName}"></option>
+                                <!--<div class="input-group">-->
+                                    <!--<div class="input-group-btn">-->
+
+                                        <!--<input type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"-->
+                                                <!--aria-haspopup="true" aria-expanded="false" id="categoryBtn">分类-->
+                                        <!--</input>-->
+
+                                        <!--<ul class="dropdown-menu">-->
+                                            <!--<li th:each="category:${categories}">-->
+                                                <!--<a th:name="${category.categoryName}" th:abbr="${category.categoryId}" onclick="selectCategory(this)"-->
+                                                   <!--th:text="${category.categoryName}"></a>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<input id="category-input" type="text" name="category" style="display: none"/>-->
+                                <select name="categoryId" class="form-control" id="category">
+                                    <option th:abbr="${category.categoryId}" th:each="category:${categories}"  th:text=" ${category.categoryName}" th:name=" ${category.categoryName}" name="categoryId" th:value="${category.categoryId}"></option>
                                     <!--</li>-->
                                 </select>
                             </div>
@@ -127,7 +143,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
                                 <p style="color: red" th:text="${msg}"></p>
-                                <button class="btn btn-lg btn-primary btn-block" type="submit" id="addProduct">添加商品</button>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">添加商品</button>
                             </div>
                         </div>
                     </div>
