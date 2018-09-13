@@ -5,43 +5,44 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "order")
+@Table(name = "orderInfo")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
-    @Column(name = "Receiver")
+    @Column(name = "receiver")
     private String receiver;
 
-    @Column(name = "OrderStatus")
+    @Column(name = "orderStatus")
     private String orderStatus;
 
-    @Column(name = "Counts")
+    @Column(name = "counts")
     private Integer counts;
 
-    @Column(name = "Price")
+    @Column(name = "price")
     private Integer price;
 
-    @Column(name = "CreateTime")
+    @Column(name = "createTime")
     private Date createTime;
 
-    @Column(name = "Address")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "PhoneNumber")
+    @Column(name = "phoneNumber")
     private Integer phoneNumber;
 
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JoinColumn(name = "UserId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
     private SysUser user;
 
-    @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JoinColumn(name = "ProductId")
-    private Product product;
+    @Column(name = "productId")
+    private Integer productId;
+
+    @Column(name = "productName")
+    private String productName;
 
     public Integer getId() {
         return id;
@@ -51,13 +52,6 @@ public class Order {
         this.id = id;
     }
 
-//    public Integer getOrderStatus() {
-//        return orderStatus;
-//    }
-//
-//    public void setOrderStatus(Integer orderStatus) {
-//        this.orderStatus = orderStatus;
-//    }
 
     public Integer getCounts() {
         return counts;
@@ -99,13 +93,13 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 
     public String getAddress() {
         return address;
@@ -113,5 +107,37 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

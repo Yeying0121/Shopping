@@ -31,6 +31,12 @@ public class SysUser implements UserDetails {
     @Column(name = "Sex")
     private String sex;
 
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    private Set<ShoppingCar> shoppingCars;
+//
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    private Set<Order> orders;
+
     @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     private List<SysRole> roles;
 
@@ -119,4 +125,20 @@ public class SysUser implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
+//   public Set<Order> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
+//
+//    public Set<ShoppingCar> getShoppingCars() {
+//        return shoppingCars;
+//    }
+//
+//    public void setShoppingCars(Set<ShoppingCar> shoppingCars) {
+//        this.shoppingCars = shoppingCars;
+//    }
 }

@@ -1,18 +1,25 @@
 package com.example.shopping.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.shopping.dao.CategoryDao;
 import com.example.shopping.dao.ProductDao;
 import com.example.shopping.entity.Product;
+import com.example.shopping.entity.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ProductService {
 
     @Autowired
     ProductDao productDao;
+
+    @Autowired
+    CategoryDao categoryDao;
 
     /**
      * 获取所有商品的列表
@@ -38,16 +45,25 @@ public class ProductService {
     /**
      *新增商品
      */
-    public Integer addProduct(Product product) {
+    public String addProduct(Product product) {
+        JSONObject result = new JSONObject();
         Product product1 = productDao.findByProductName(product.getProductName());
+        ProductCategory productCategory = categoryDao.getOne(product.getCategoryId().getCategoryId());
         if (product1 == null) {
-            productDao.save(product);
-            return  1;
+            product1 = new Product();
+            product1.setProductName(product.getProductName());
+            product1.setPrice(product.getPrice());
+            product1.setProductStock(product.getProductStock());
+            product1.setImageUrl(product.getImageUrl());
+            product1.setDesc(product.getDesc());
+            product1.setCategoryId(productCategory);
+            product1.setCreateTime(new Date());
+            productDao.save(product1);
+            result.put("res","添加商品成功！");
+            return  result.toJSONString();
         } else {
-//            product1.setProductStock(product1.getProductStock()+product.getProductStock());
-//            product1.setPrice(product.getPrice());
-//            product1.setImageUrl(product.getImageUrl());
-            return 0;
+            result.put("res","添加商品失败，此商品已存在!");
+            return result.toJSONString();
         }
     }
     /**

@@ -7,8 +7,8 @@ $(document).ready(function(){
             var email = result.email;
             var sex = result.sex;
             var id = result.id;
-            var url = 'http://localhost:8080/shoppingCar?userId='+id;
-            $('#shoppingCar').attr('href',url);
+            // var url = 'http://localhost:8080/shoppingCar?userId='+id;
+            // $('#shoppingCar').attr('href',url);
             document.getElementById("userId").innerHTML = id;
             document.getElementById("userName").value = userName;
             document.getElementById("email").value = email;
@@ -21,7 +21,7 @@ $(document).ready(function(){
     })
 })
 
-$(function() {
+// $(function() {
     $("#save").click(function () {
         var userId = document.getElementById("userId").innerText; // header.html
         var userName = document.getElementById("userName").value; //
@@ -53,4 +53,4 @@ $(function() {
 
         })
     })
-})
+// })

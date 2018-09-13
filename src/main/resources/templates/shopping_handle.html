@@ -5,7 +5,6 @@
     <title>小小购物</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -22,18 +21,31 @@
         <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 control-main-container">
             <table class="table table-hover center" id="shoppingcar">
                 <tr class="info">
+                    <td>订单编号</td>
                     <td>订单用户</td>
                     <td>商品名称</td>
                     <td>购买数量</td>
                     <td>下单时间</td>
+                    <td>修改订单状态</td>
                     <td>操作</td>
                 </tr>
                 <tr th:each="order: ${orders}">
+                    <td th:text="${order.getId()}" id="id"></td>
                     <td th:text="${order.getUser().getUsername()}"></td>
-                    <td th:text="${order.getProduct().productName}"></td>
+                    <td th:text="${order.productName}"></td>
+                    <td th:text="${order.counts}"></td>
                     <td th:text="${order.createTime}"></td>
-
+                    <td><select name="orderStatus" class="form-control" id="orderStatus">
+                        <option value="待发货">待发货</option>
+                        <option value="配送中">配送中</option>
+                        <option value="已收货">已收货</option>
+                    </select></td>
+                    <td><a class="btn btn-primary" id="handle">修改</a></td>
                 </tr>
             </table>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/handle.js}"></script>
 </body>
 </html>

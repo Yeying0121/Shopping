@@ -29,11 +29,11 @@
             <ul class="nav navbar-nav">
 
                 <li class="active"><a href="/shoppingCar/" id="shoppingCar">购物车</a></li>
-                <li><a th:href="@{/shopping/shopping_record}">订单状态</a></li>
+                <li><a href="#" id="shopping_record">订单状态</a></li>
                 <li><a th:href="@{/users/amend_info}">个人资料</a></li>
-                <!--<li><a th:href="@{/logout}">注销登录</a></li>-->
+                <li><a th:href="@{/logout}">注销登录</a></li>
                 <li sec:authorize="hasAuthority('admin')"><a th:href="@{/control}">控制台</a></li>
-                <li sec:authorize="hasAuthority('admin')"><a th:href="@{/shopping/shopping_handle}">处理订单</a></li>
+                <li sec:authorize="hasAuthority('admin')"><a th:href="@{/order/shopping_handle}">处理订单</a></li>
 
             </ul>
 

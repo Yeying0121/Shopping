@@ -1,6 +1,7 @@
 package com.example.shopping.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.shopping.dao.ShoppingCarDao;
 import com.example.shopping.dao.UserDao;
 import com.example.shopping.entity.Product;
 import com.example.shopping.entity.ShoppingCar;
@@ -28,6 +29,9 @@ public class ShoppingCarController {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    ShoppingCarDao shoppingCarDao;
+
     @ResponseBody
     @PostMapping("/save")
     public String addShoppingCar(@RequestBody ShoppingCar shoppingCar) {
@@ -51,5 +55,14 @@ public class ShoppingCarController {
         List<ShoppingCar> shoppingCars = shoppingCarService.getShoppingCars(userId);
         model.addAttribute("shoppingCars",shoppingCars);
         return "shoppingCar";
+    }
+
+    @GetMapping("/delete")
+    public String deleteShoppingCar(@RequestParam Integer id){
+        ShoppingCar shoppingCar = shoppingCarDao.getOne(id);
+        Integer userId = shoppingCar.getUser().getId();
+        shoppingCarService.deleteShoppingCar(id);
+
+        return "redirect:/shoppingCar?userId="+userId;
     }
 }

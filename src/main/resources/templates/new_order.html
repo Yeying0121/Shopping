@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="productName" class="col-sm-2 col-md-2 control-label">购买数量</label>
+                            <label for="productCounts" class="col-sm-2 col-md-2 control-label">购买数量</label>
                                 <div class="btn-group" role="group" style="margin-left: -755px">
                                     <button type="button" class="btn btn-default" id="subCounts">-</button>
                                     <input id="productCounts" type="button" class="btn btn-default" value="1">
@@ -54,6 +54,12 @@
                             <label for="price" class="col-sm-2 col-md-2 control-label">小计</label>
                             <div class="col-sm-6 col-md-6">
                                 <span type="text" class="form-control" id="price" name="price" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-sm-2 col-md-2 control-label" style="display: none">商品编号</label>
+                            <div class="col-sm-6 col-md-6" style="display: none">
+                                <span type="text" class="form-control" id="productId" name="productId" ></span>
                             </div>
                         </div>
                     <br>
@@ -67,5 +73,6 @@
         </div>
     </div>
 </div>
+<script th:src="@{/js/order.js}"></script>
 </body>
 </html>

@@ -43,20 +43,34 @@ public class OrderService {
     /**
      * 新增订单
      */
-    public JSONObject addOrder(Integer userId,Integer productId,Integer counts,String address,Integer phoneNumber){
+    public JSONObject addOrder(Integer userId,Integer productId,Integer counts,String address,Integer phoneNumber,String recevier){
         JSONObject result = new JSONObject();
         SysUser user = userDao.getOne(userId);
         Product product = productDao.findByProductId(productId);
         Order order = new Order();
         order.setOrderStatus("待发货！");
-        order.setCounts(counts);
-        order.setProduct(product);
         order.setUser(user);
+        order.setCounts(counts);
+        order.setProductId(productId);
         order.setAddress(address);
         order.setPhoneNumber(phoneNumber);
+        order.setReceiver(recevier);
         order.setPrice(product.getPrice()*counts);
         order.setCreateTime(new Date());
+        orderDao.save(order);
         result.put("res","订单创建成功！");
         return result;
+    }
+
+    /**
+     * 修改订单状态
+     */
+    public String updateOrder(Order order){
+        JSONObject result = new JSONObject();
+        Order order1 = orderDao.getOne(order.getId());
+        order1.setOrderStatus(order.getOrderStatus());
+        orderDao.save(order1);
+        result.put("res","修改订单状态成功！");
+        return result.toJSONString();
     }
 }

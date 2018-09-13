@@ -25,15 +25,16 @@
                     <!--<td>用户ID</td>-->
                     <td>是否购买</td>
                     <td>商品名称</td>
-                    <td>商品单价</td>
+                    <td>商品小计</td>
                     <td>商品数量</td>
+                    <td style="text-align: center" colspan="2">操作</td>
                 </tr>
                 <tr th:each="shoppingCar: ${shoppingCars}">
-                    <td  ><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
                     <td th:text="${shoppingCar.productName}"></td>
                     <td th:text="${shoppingCar.productPrice}"></td>
                     <td th:text="${shoppingCar.counts}"></td>
-                    <!--<td th:text="${user.sex}"></td>-->
+                    <td><a class="btn btn-primary" th:href="@{'/shoppingCar/delete?id='+${shoppingCar.id}}" onclick="return delete_confirm()">删除</a></td>
                 </tr>
             </table>
             <div class="row">
@@ -43,5 +44,15 @@
         </div>
     </div>
 </div>
+<script>
+    function delete_confirm() {
+        var msg = "您确定要删除吗？";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

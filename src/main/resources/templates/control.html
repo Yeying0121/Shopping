@@ -9,14 +9,14 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
-    <script th:inline="javascript">
-        function selectCategory(obj) {
-            var name = $(obj).attr("name");
-            var catId = $(obj).attr("abbr");
-            $("#categoryBtn").html(name);
-            $("#category-input").val(catId);
-        }
-    </script>
+    <!--<script th:inline="javascript">-->
+        <!--function selectCategory(obj) {-->
+            <!--var name = $(obj).attr("name");-->
+            <!--var catId = $(obj).attr("abbr");-->
+            <!--$("#categoryBtn").html(name);-->
+            <!--$("#category-input").val(catId);-->
+        <!--}-->
+    <!--</script>-->
 </head>
 <body>
 <div th:include="/common/header :: header"></div>
@@ -105,10 +105,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="productType" class="col-sm-2 col-md-2 control-label">商品类别</label>
+                            <label for="category" class="col-sm-2 col-md-2 control-label">商品类别</label>
                             <div class="col-sm-6 col-md-6">
-                                <select name="productCategory" class="form-control" id="productType">
-                                    <option onclick="selectCategory(this)" th:abbr="${category.categoryId}" th:each="category:${categories}"  th:text=" ${category.categoryName}" name="category"></option>
+                                <select name="category" class="form-control" id="category">
+                                    <option th:each="category:${categories}"  th:text=" ${category.categoryName}" name="category" th:value="${category.categoryName}"></option>
                                     <!--</li>-->
                                 </select>
                             </div>
@@ -118,9 +118,7 @@
                             <div class="col-sm-6 col-md-6">
                                 <input type="text" class="form-control" id="productImg" placeholder="请输入商品图片链接" name="imageUrl" required="required"/>
                             </div>
-                                <!--<p class="help-block">上传的图片大小应为280*160大小</p>-->
                             </div>
-                            <!--<button class="btn btn-primary col-sm-2 col-md-2" onclick="fileUpload()">上传图片</button>-->
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6" id="imgPreSee">
@@ -129,7 +127,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
                                 <p style="color: red" th:text="${msg}"></p>
-                                <button class="btn btn-lg btn-primary btn-block" type="submit" >添加商品</button>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" id="addProduct">添加商品</button>
                             </div>
                         </div>
                     </div>

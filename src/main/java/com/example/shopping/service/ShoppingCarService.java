@@ -3,6 +3,7 @@ package com.example.shopping.service;
 import com.alibaba.fastjson.JSONObject;
 import com.example.shopping.dao.ShoppingCarDao;
 import com.example.shopping.dao.UserDao;
+import com.example.shopping.entity.Product;
 import com.example.shopping.entity.ShoppingCar;
 import com.example.shopping.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,14 @@ public class ShoppingCarService {
         JSONObject result = new JSONObject();
         ShoppingCar shoppingCar = shoppingCarDao.findByUserIdAndProductId(userId,productId);
         SysUser user = userDao.getOne(userId);
+        Product product = productService.getProductInfo(productId);
         if(shoppingCar == null){
             ShoppingCar shoppingCar1 = new ShoppingCar();
             shoppingCar1.setUser(user);
             shoppingCar1.setProductId(productId);
             shoppingCar1.setCounts(counts);
-            shoppingCar1.setProductPrice(productService.getProductInfo(productId).getPrice()*counts);
+            shoppingCar1.setProductName(product.getProductName());
+            shoppingCar1.setProductPrice(product.getPrice()*counts);
             shoppingCarDao.save(shoppingCar1);
         }else {
             shoppingCar.setCounts(shoppingCar.getCounts()+counts);
@@ -62,5 +65,12 @@ public class ShoppingCarService {
         List<ShoppingCar> shoppingCars = shoppingCarDao.findByUserId(userId);
         return shoppingCars;
 
+    }
+
+    /**
+     * 删除购物车
+     */
+    public void deleteShoppingCar(Integer id){
+        shoppingCarDao.deleteById(id);
     }
 }

@@ -46,14 +46,15 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String saveProduct(Product product,Model model) {
-        product.setCreateTime(new Date());
-        if (productService.addProduct(product) == 1) {
-            model.addAttribute("msg","添加商品成功");
-        } else {
-            model.addAttribute("msg","商品已存在，请重新添加商品！");
-        }
-        return "redirect:/control";
+    public String saveProduct(@RequestBody Product product,Model model) {
+        String result = productService.addProduct(product);
+
+//        if (productService.addProduct(product) == 1) {
+//            model.addAttribute("msg","添加商品成功");
+//        } else {
+//            model.addAttribute("msg","商品已存在，请重新添加商品！");
+//        }
+        return result;
     }
 
     @GetMapping("/search")

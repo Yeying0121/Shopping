@@ -1,8 +1,10 @@
 package com.example.shopping.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.shopping.dao.ProductDao;
 import com.example.shopping.dao.UserDao;
 import com.example.shopping.entity.Order;
+import com.example.shopping.entity.Product;
 import com.example.shopping.entity.SysUser;
 import com.example.shopping.service.OrderService;
 import com.example.shopping.utils.CommonUtilTools;
@@ -24,18 +26,28 @@ public class OrderController {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    ProductDao productDao;
+
     @GetMapping("/shopping_record")
-    public String getOrders(@RequestParam Integer userId, Model model){
+    public String getOrders(Integer userId, Model model){
         List<Order> orders = orderService.getOrderList(userId);
         model.addAttribute("orders",orders);
         return "shopping_record";
     }
 
-    @PostMapping("/shopping_handle")
+    @GetMapping("/shopping_handle")
     public String getAllOrders(Model model){
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders",orders);
         return "shopping_handle";
+    }
+
+    @PostMapping("/handle")
+    @ResponseBody
+    public String handle(@RequestBody Order order){
+        String res = orderService.updateOrder(order);
+        return res;
     }
 
     @GetMapping("/new")
@@ -50,12 +62,13 @@ public class OrderController {
         String userName = authentication.getName();
         SysUser user = userDao.findByUsername(userName);
         Integer userId = user.getId();
-        Integer productId = order.getProduct().getProductId();
+        Integer productId = order.getProductId();
         Integer counts = order.getCounts();
         String address = order.getAddress();
+        String receiver = order.getReceiver();
         Integer phoneNumber = order.getPhoneNumber();
         try {
-            JSONObject res = orderService.addOrder(userId, productId, counts, address, phoneNumber);
+            JSONObject res = orderService.addOrder(userId, productId, counts, address, phoneNumber,receiver);
             return res.toJSONString();
         } catch (Exception e) {
             return CommonUtilTools.returnFailResponse(e);
