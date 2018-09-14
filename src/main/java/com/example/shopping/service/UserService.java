@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,19 +55,23 @@ public class UserService {
     /**
      * 新增用户
      */
-    public void addUser(SysUser user){
-        userDao.save(user);
-//        SysUser user1 = userDao.findByUsername(user.getUsername());
-//        if(user1!=null){
-//            return "注册失败，用户名已存在！";
-//        }else {
-//            user1 = new SysUser();
-//            user.setUsername(user.getUsername());
-//            user.setEmail(user.getEmail());
-//            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//            user.setSex(user.getSex());
-//            return "success";
-//        }
+    public String addUser(SysUser user){
+        JSONObject result = new JSONObject();
+        SysUser sysUser = userDao.findByUsername(user.getUsername());
+        if (sysUser != null) {
+            result.put("flag",0);
+            result.put("res", "注册失败，用户名已存在！");
+        } else {
+            sysUser = new SysUser();
+            sysUser.setUsername(user.getUsername());
+            sysUser.setPassword(user.getPassword());
+            sysUser.setEmail(user.getEmail());
+            sysUser.setSex(user.getSex());
+            user.setRegisterTime(new Date());
+            userDao.save(sysUser);
+            result.put("flag",1);
+        }
+        return result.toJSONString();
     }
 
     /**

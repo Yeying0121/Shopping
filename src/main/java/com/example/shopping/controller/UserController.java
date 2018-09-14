@@ -47,16 +47,15 @@ public class UserController {
 
 
     @PostMapping("/doRegister")
-    public String doregister(SysUser user, Model model) {
-        SysUser sysUser = userDao.findByUsername(user.getUsername());
-        if (sysUser != null) {
-            model.addAttribute("msg", "注册失败，用户名已存在！");
-            return "register";
-        } else {
-            user.setRegisterTime(new Date());
-            userService.addUser(user);
-            return "index";
-        }
+    @ResponseBody
+    public String doregister(@RequestBody SysUser user) {
+        String result = userService.addUser(user);
+        return result;
+    }
+
+    @GetMapping("/index")
+    public String index(){
+        return "index";
     }
 
     @PostMapping("/identity")
