@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>小小购物</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link th:href="@{/css/signin.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container-fluid">
+<div th:include="/common/header :: header"></div>
+<!-- 中间内容 -->
+<div class="center-block">
+<div>
+    <center><h2 class="title center">密码修改</h2>
+    <br/>
+    <p style="color: red" th:text="${msg}" th:if="${ not #strings.isEmpty(msg)}"></p></center>
+    <div class="col-sm-offset-2 col-md-offest-2">
+        <!-- 表单输入 -->
+        <div  class="form-horizontal">
+            <div class="form-group">
+                <label for="prePassword" class="col-sm-2 col-md-2 control-label">原密码</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="password" class="form-control" id="prePassword" placeholder="请输入原密码" required="required"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newPassword" class="col-sm-2 col-md-2 control-label">新密码</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="password" class="form-control" id="newPassword" placeholder="请输入新密码" required="required"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passwordConfirm" class="col-sm-2 col-md-2 control-label">密码确认</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="password" class="form-control" id="passwordConfirm" placeholder="请再次输入新密码" required="required"/>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <button class="btn btn-lg btn-primary btn-block" id="save">保存</button>
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+<script th:src="@{/js/change_pw.js}"></script>
+</body>
+<script>
+    function isEmail(str) {
+        var reg = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/;
+        return reg.test(str);
+    }
+    function fun1() {
+        if (!isEmail(document.getElementById("inputEmail").value)) {
+            alert("邮箱格式不正确！");
+            document.getElementById("inputEmail").focus();
+            return false;
+        }
+        return true;
+    }
+
+</script>
+</html>

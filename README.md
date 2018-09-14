@@ -18,6 +18,7 @@
 
 - 登录与注册功能
 - 修改个人资料
+- 修改密码功能
 - 浏览商品功能
 - 根据商品或分类关键词搜索商品功能
 - 查看商品详情
@@ -43,6 +44,12 @@
 
 
 ![2](http://img0.ph.126.net/Yyv_0DuJcU-4AjH5oY6i5Q==/1682094460923504096.png)
+
+![13](http://img0.ph.126.net/TZgrRbHAoi4MnbwJcQGfTg==/6608197923843343188.png)
+
+
+
+![12](http://img2.ph.126.net/d_JDyraNb_BU3_UQwur5sw==/730146089687923568.png)
 
 
 

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
@@ -76,6 +77,40 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
         return "redirect:/control";
+    }
+
+    @GetMapping("/change_pw")
+    public String toChangePage(){
+        return "change_pw";
+    }
+
+    @PostMapping("/savePassword")
+    @ResponseBody
+    public String changePw(HttpServletRequest request){
+        JSONObject result = new JSONObject();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        SysUser user = userDao.findByUsername(userName);
+        String prePassword = request.getParameter("prePassword");
+        if(!prePassword.equals(user.getPassword())){
+            result.put("flag",0);
+            result.put("res","你输入的原密码不正确，请重新输入！");
+            return result.toJSONString();
+        }else {
+            String newPassword = request.getParameter("newPassword");
+            String passwordConfirm = request.getParameter("passwordConfirm");
+            if(!newPassword.equals(passwordConfirm)){
+                result.put("flag",2);
+                result.put("res","您两次输入的密码不一致，请重新输入！");
+                return result.toJSONString();
+            }else {
+                user.setPassword(newPassword);
+                userDao.save(user);
+                result.put("flag",1);
+                result.put("res","密码修改成功,请重新登录!");
+                return result.toJSONString();
+            }
+        }
     }
 
     /**
